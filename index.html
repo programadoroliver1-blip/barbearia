@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desafio de Cubo Mágico - Cronômetro com Placar</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="app__header">
+      <h1>Desafio de Cubo Mágico</h1>
+      <p class="subtitle">Cronômetro com ranking para decidir quem monta o cubo mais rápido</p>
+    </header>
+
+    <section class="timer" aria-label="Cronômetro">
+      <div class="timer__display" id="timerDisplay">00:00.000</div>
+      <div class="timer__controls">
+        <button type="button" class="btn" id="startBtn">Iniciar</button>
+        <button type="button" class="btn" id="stopBtn" disabled>Parar</button>
+        <button type="button" class="btn" id="resetBtn" disabled>Nova tentativa</button>
+      </div>
+    </section>
+
+    <section class="registration" aria-label="Registro de competidores e tempos">
+      <h2>Registrar tempo</h2>
+      <form id="recordForm" class="form">
+        <label class="form__field">
+          <span>Nome do competidor</span>
+          <input type="text" id="competitorName" name="competitorName" placeholder="Ex.: Ana" autocomplete="off" required />
+        </label>
+        <label class="form__field">
+          <span>Tempo registrado</span>
+          <input type="text" id="recordedTime" name="recordedTime" readonly value="00:00.000" />
+        </label>
+        <div class="form__actions">
+          <button type="submit" class="btn btn--primary" id="saveBtn" disabled>Salvar tempo</button>
+          <button type="button" class="btn" id="clearHistoryBtn" title="Remove todos os registros" disabled>Limpar placar</button>
+        </div>
+      </form>
+      <p class="form__hint">Pare o cronômetro para salvar e utilize "Nova tentativa" para iniciar outra rodada.</p>
+    </section>
+
+    <section class="scoreboard" aria-label="Ranking de tempos">
+      <div class="scoreboard__header">
+        <h2>Ranking</h2>
+        <div class="scoreboard__filters">
+          <label>
+            <input type="checkbox" id="showAllAttempts" />
+            Mostrar todas as tentativas
+          </label>
+        </div>
+      </div>
+      <div class="scoreboard__table-wrapper">
+        <table class="scoreboard__table" aria-describedby="rankingDescription">
+          <caption id="rankingDescription">Lista ordenada pelo melhor tempo de cada competidor.</caption>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Competidor</th>
+              <th scope="col">Melhor tempo</th>
+              <th scope="col">Última tentativa</th>
+              <th scope="col">Tentativas</th>
+            </tr>
+          </thead>
+          <tbody id="scoreboardBody">
+            <tr class="scoreboard__empty">
+              <td colspan="5">Nenhum tempo registrado ainda. Que tal iniciar uma disputa?</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="history" id="history" hidden>
+        <h3>Histórico completo</h3>
+        <ul class="history__list" id="historyList" aria-live="polite"></ul>
+      </div>
+    </section>
+  </main>
+
+  <template id="historyItemTemplate">
+    <li class="history__item">
+      <span class="history__time"></span>
+      <span class="history__name"></span>
+    </li>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
